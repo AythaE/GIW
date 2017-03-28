@@ -7,3 +7,5 @@ He probado el [Getting Started de Tweepy](http://docs.tweepy.org/en/v3.5.0/getti
 He tenido problemas con la paginación y tendre que ver como resolverlo.
 
 Para escribir los datos a CSV esto parece  [prometedor](http://stackoverflow.com/a/21869560/6441806)
+
+Probando con la librería he logrado obtener los campos que coinciden con los devueltos por nodeXL en el método `tweetFields(tweet)`, además he logrado obtener multiples tweets (+ de 2000) sobre un tema entre fechas delimitadas concatenando búsquedas uniendo sus resultados en una sola lista.
