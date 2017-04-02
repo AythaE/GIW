@@ -1,0 +1,26 @@
+@media print {
+    a[href]:after {
+        content: "" !important;
+    }
+
+    abbr[title]:after {
+        content: " " !important;
+    }
+    body {
+        font-size: 0.625em;
+    }
+
+    .portada {
+        text-align: center;
+        width: 80%;
+        margin: auto;
+    }
+
+    .portada-middle {
+        margin-top: 50px;
+    }
+
+    .portada-down {
+        margin-top: 100px;
+    }
+}

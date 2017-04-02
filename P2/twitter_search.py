@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import csv
+import datetime
 import json
 
 import tweepy
@@ -22,7 +23,7 @@ def printsMenu():
 
   print("\n\n")
   searchQuery = input("Insert the search query to look for tweets: ")
-  tweetNum = input("Choose the number of tweets to recover: ")
+  tweetNum = input("Choose the number of tweets to recover (max. 18.000): ")
   since = input(
       "Insert the first creation date of the tweets to recover formatted as YYYY-MM-DD (no more than 7 days before now)[Leave empty for not limit]: ")
   until = input(
@@ -36,15 +37,19 @@ def printsMenu():
 
   print()
 
-  csvTweets = searchQuery + "_UntilNow_Tweets.csv"
+  today = datetime.date.today()
+  csvTweets = searchQuery + "_" + str(today.day) + "-" + \
+      str(today.month) + "-" + str(today.year) + "_Tweets.csv"
   print("Saving tweets to " + csvTweets)
   saveTweetsToCSV(totalTweets, csvTweets)
 
-  csvUsers = searchQuery + "_UntilNow_Users.csv"
+  csvUsers = searchQuery + "_" + str(today.day) + "-" + \
+      str(today.month) + "-" + str(today.year) + "_Users.csv"
   print("Saving tweets users to " + csvUsers)
   saveTweetsUsersToCSV(totalTweets, csvUsers)
 
-  csvEdges = searchQuery + "_UntilNow_Edges.csv"
+  csvEdges = searchQuery + "_" + str(today.day) + "-" + \
+      str(today.month) + "-" + str(today.year) + "_Edges.csv"
   print("Saving tweets relationships to " + csvEdges)
   saveTweetRelationshipsToCSV(totalTweets, csvEdges)
 
