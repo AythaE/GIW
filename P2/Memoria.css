@@ -21,6 +21,8 @@
     }
     table {
         border-collapse: collapse;
+        width: auto;
+        margin: auto;
     }
     table, th, td {
         border: 1px solid black;

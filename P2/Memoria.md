@@ -114,11 +114,26 @@ Peso de arista > 1                                       | 50.258          | 5.8
 Componente gigante + K-core (k = 2)                      | 20.188          | 80.187            | 44,17                                 | 74,69
 Componente gigante + K-core (k = 3)                      | 11.431          | 62.830            | 22,74                                 | 58,52
 Componente gigante + K-core (k = 10)                     | 1.421           | 18.899            | 2,83                                  | 17,6
-Componente gigante + K-core (k = 2) + Peso de arista > 1 | 1.003           | 2.805             | 2                                     | 2,61
+Componente gigante + K-core (k = 2) + Peso de arista > 1 | 1.007           | 2.809             | 2                                     | 2,61
 
-Como se puede ver el filtrado _K-core_ por si solo no elimina los suficientes enlaces para que la red sea manejable, a la inversa le pasa al filtro _Peso de arista_. La mejor solución por tanto parece la combinación de estos dos filtros como se ve en la última fila de la tabla.
+Como se puede ver el filtrado _K-core_ por si solo no elimina los suficientes enlaces para que la red sea manejable, a la inversa le pasa al filtro _Peso de arista_. La mejor solución por tanto parece la combinación de estos dos filtros como se ve en la última fila de la tabla. Partiré de ese filtrado para el resto del trabajo, pero para algunas cosas podría ser necesario filtrar aún más incluso
 
 ## 3. Cálculo de los valores de las medidas de análisis
+
+<br/><br/><br/><br/><br/><br/>
+Medida                                                             |  Valor
+-------------------------------------------------------------------|---------
+Número de nodos (_N_)                                                | 1.007
+Número de aristas (_L_)                                              | 2.809
+Densidad (_D_)                                                       | 0,003
+Grado medio (&lt;_k_&gt;)                                            | 2,789
+Grado medio con pesos                                                | 6,953
+Diámetro (_d<sub>max</sub>_)                                         | 8
+Distancia media (&lt;_d_&gt;)                                        | 2,447
+Distancia media para una red<br/>aleatoria equivalente (&lt;_d<sub>aleatoria</sub>_&gt;) | 6,742
+Coeficiente de clustering medio (&lt;_C_&gt;)                                   |  0,090
+Coeficiente de clustering medio para<br/>una red aleatoria equivalente (&lt;_C<sub>aleatoria</sub>_&gt;) | 0,00277
+
 
 ## 4. Determinación de las propiedades de la red
 
