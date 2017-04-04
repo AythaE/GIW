@@ -100,44 +100,190 @@ Por tanto el siguiente candidato es **Fast Pathfinder**, partiendo de las refere
 
 <br/><br/>
 #### 2.1.2. Estrategias de filtrado
-Resignado tras los frustrados intentos con pathfinder me decanté por aplicar filtrados. Lo primero que parece lógico, teniendo en cuenta que es una red de usuarios de Twitter, es filtrar por el número de seguidores de usuarios como una forma de conocer su relevancia general. Pero con la creación de nodos inexistentes a partir de las relaciones los usuarios creados no disponen  de esos datos por lo que en lugar de eso he decidido filtrar por grado de los nodos y por peso de las aristas. Esto se realiza con los filtros de Gephi **_K-core_** de la categoría _Topología_ y **_Peso de arista_** de la categoría _Aristas_ respectivamente. Además de esto he probado con el filtro **_Componente gigante_** de la categoría _Topología_ que se basa en mantener solamente nodos del componente conectado mayoritario, ya que lo hemos utilizado en clase como primer filtro.
+Resignado tras los frustrados intentos con pathfinder me decanté por aplicar filtrados. Lo primero que parece lógico, teniendo en cuenta que es una red de usuarios de Twitter, es filtrar por el número de seguidores de usuarios como una forma de conocer su relevancia general. Pero con la creación de nodos inexistentes a partir de las relaciones los usuarios creados no disponen  de esos datos por lo que en lugar de eso he decidido filtrar por grado de los nodos y por peso de las aristas. Esto se realiza con los filtros de Gephi **_K-core_** de la categoría _Topología_ y **_Peso de arista_** de la categoría _Aristas_ respectivamente. Además de esto he probado con el filtro **_Componente gigante_** de la categoría _Topología_ que se basa en mantener solamente nodos del componente conectado mayoritario y con el filtro **_Bucle_** de la categoria _Aristas_ que elimina los autoenlaces, ya que no me interesa que esos autoenlaces influyan en el filtrado de grado y peso de arista por no aportar información interesante.
 
 El objetivo es llegar a una red manejable entorno a los 1000-2000 nodos. En la siguiente tabla se recoge el resultado de diversos filtrados
 
-Estrategia de filtrado                                   | Numero de Nodos | Número de enlaces | % Nodos respecto a la red sin filtrar | % Enlaces respecto a al red sin filtrar
----------------------------------------------------------|-----------------|-------------------|---------------------------------------|----------------------------------------
-Ninguna                                                  | 50.258          | 107.365           | -                                     | -
-Componente gigante                                       | 46.843          | 106.818           | 93,21                                 | 99,49
-K-core (k = 2)                                           | 20.264          | 80.280            | 40,32                                 | 74,77
-K-core (k = 3)                                           | 11.443          | 62.853            | 22,77                                 | 58,54
-Peso de arista > 1                                       | 50.258          | 5.864             | 100                                   | 5,46
-Componente gigante + K-core (k = 2)                      | 20.188          | 80.187            | 44,17                                 | 74,69
-Componente gigante + K-core (k = 3)                      | 11.431          | 62.830            | 22,74                                 | 58,52
-Componente gigante + K-core (k = 10)                     | 1.421           | 18.899            | 2,83                                  | 17,6
-Componente gigante + K-core (k = 2) + Peso de arista > 1 | 1.007           | 2.809             | 2                                     | 2,61
+Estrategia de filtrado                                           | Numero de Nodos | Número de enlaces | % Nodos respecto a la red sin filtrar | % Enlaces respecto a al red sin filtrar
+-----------------------------------------------------------------|-----------------|-------------------|---------------------------------------|----------------------------------------
+Ninguna                                                          | 50.258          | 107.365           | -                                     | -
+Componente gigante                                               | 46.811          | 106.809           | 93,14                                 | 99,48
+K-core (k = 2)                                                   | 20.264          | 80.280            | 40,32                                 | 74,77
+K-core (k = 3)                                                   | 11.443          | 62.853            | 22,77                                 | 58,54
+Peso de arista > 1                                               | 50.258          | 5.864             | 100                                   | 5,46
+Componente gigante + K-core (k = 2)                              | 20.188          | 80.187            | 44,17                                 | 74,69
+Componente gigante + K-core (k = 3)                              | 11.431          | 62.830            | 22,74                                 | 58,52
+Componente gigante + K-core (k = 10)                             | 1.421           | 18.899            | 2,83                                  | 17,6
+Componente gigante + K-core (k = 2) + Peso de arista > 1         | 1.007           | 2.809             | 2                                     | 2,61
+Componente gigante + Bucle + K-core (k = 2) + Peso de arista > 1 | 1.002           | 2.770             | 1,99                                  | 2,58
 
-Como se puede ver el filtrado _K-core_ por si solo no elimina los suficientes enlaces para que la red sea manejable, a la inversa le pasa al filtro _Peso de arista_. La mejor solución por tanto parece la combinación de estos dos filtros como se ve en la última fila de la tabla. Partiré de ese filtrado para el resto del trabajo, pero para algunas cosas podría ser necesario filtrar aún más incluso
+Como se puede ver el filtrado _K-core_ por si solo no elimina los suficientes enlaces para que la red sea manejable, a la inversa le pasa al filtro _Peso de arista_. La mejor solución por tanto parece la combinación de estos dos filtros como se ve en la última fila de la tabla. Partiré de ese filtrado para el resto del trabajo, pero para algunas tareas podría ser necesario filtrar aún más incluso.
+
+<br/><br/><br/>
 
 ## 3. Cálculo de los valores de las medidas de análisis
 
-<br/><br/><br/><br/><br/><br/>
-Medida                                                             |  Valor
--------------------------------------------------------------------|---------
-Número de nodos (_N_)                                                | 1.007
-Número de aristas (_L_)                                              | 2.809
-Densidad (_D_)                                                       | 0,003
-Grado medio (&lt;_k_&gt;)                                            | 2,789
-Grado medio con pesos                                                | 6,953
-Diámetro (_d<sub>max</sub>_)                                         | 8
-Distancia media (&lt;_d_&gt;)                                        | 2,447
-Distancia media para una red<br/>aleatoria equivalente (&lt;_d<sub>aleatoria</sub>_&gt;) | 6,742
-Coeficiente de clustering medio (&lt;_C_&gt;)                                   |  0,090
-Coeficiente de clustering medio para<br/>una red aleatoria equivalente (&lt;_C<sub>aleatoria</sub>_&gt;) | 0,00277
+### 3.1. Medidas globales de la red
+
+Medida                                                                                                   | Valor
+---------------------------------------------------------------------------------------------------------|--------
+Número de nodos (_N_)                                                                                    | 1.002
+Número de aristas (_L_)                                                                                  | 2.770
+Densidad (_D_)                                                                                           | 0,003
+Grado medio (&lt;_k_&gt;)                                                                                | 2,764
+Grado medio con pesos                                                                                    | 6,856
+Diámetro (_d<sub>max</sub>_)                                                                             | 8
+Distancia media (&lt;_d_&gt;)                                                                            | 2,447
+Distancia media para una red<br/>aleatoria equivalente (&lt;_d<sub>aleatoria</sub>_&gt;)                 | 6,7964
+Coeficiente de clustering medio (&lt;_C_&gt;)                                                            | 0,082
+Coeficiente de clustering medio para<br/>una red aleatoria equivalente (&lt;_C<sub>aleatoria</sub>_&gt;) | 0,00276
+
+### 3.2. Conectividad de la red
+
+Medida                                                                     | Valor
+---------------------------------------------------------------------------|--------------
+Número de componentes conexas                                              | 1
+Número de nodos de la componente<br/>gigante (% Respecto a la red total)   | 1.002 (1,99%)
+Número de enlaces de la componente<br/>gigante (% Respecto a la red total) | 2.770 (2,58%)
 
 
 ## 4. Determinación de las propiedades de la red
 
+<img src="imgs/Degree/degree-distribution.png" alt="Gráfica de la distribución de grados" style="width: 380px; height: auto; display: block; margin: auto;"/>
+
+<img src="imgs/Degree/indegree-distribution.png" alt="Gráfica de la distribución de grados de entrada" style="width: 240px; height: auto; display: block; float: left;"/>
+
+<img src="imgs/Degree/outdegree-distribution.png" alt="Gráfica de la distribución de grados de salida" style="width: 240px; height: auto; display: block; float: right;"/>
+
+
 ## 5. Calculo de los valores de las medidas de análisis de redes sociales
+
+<div style="display: block; float: left;">
+
+id              | eigencentrality
+----------------|----------------
+kira_95         | 1
+gerardotc       | 0,7410629959
+iunida          | 0,7241817322
+\_ju1_          | 0,3906274078
+Yo_Soy_Asin     | 0,3362844387
+subversivos_    | 0,2979991883
+ctxt_es         | 0,243182962
+protestona1     | 0,2374092107
+Klaseobreratk   | 0,2309777553
+Xuxipc          | 0,2198197312
+VictorGonz54    | 0,2174925892
+rcabrero75      | 0,1702846049
+SiPeroNo1       | 0,1644482346
+Famelica_legion | 0,1594494011
+ForretsGump     | 0,1588022263
+vmm7773         | 0,1443371012
+gerar666        | 0,1415573134
+ytuquesabes_    | 0,1372195991
+Cazatalentos    | 0,133333541
+carolacaracola5 | 0,1296667073
+
+</div>
+<div style="display: block; float: center;">
+
+id              | weighted degree
+----------------|----------------
+iunida          | 810
+kira_95         | 789
+\_ju1_          | 461
+gerardotc       | 444
+subversivos_    | 302
+protestona1     | 249
+ctxt_es         | 247
+Yo_Soy_Asin     | 233
+Xuxipc          | 220
+rcabrero75      | 188
+SiPeroNo1       | 173
+Cazatalentos    | 140
+vmm7773         | 137
+ForretsGump     | 119
+Klaseobreratk   | 102
+gabrielrufian   | 101
+Famelica_legion | 99
+elmundotoday    | 93
+gerar666        | 78
+VictorGonz54    | 77
+
+</div>
+<div style="display: block; float: right;">
+
+id              | degree
+----------------|-------
+kira_95         | 293
+iunida          | 277
+gerardotc       | 206
+\_ju1_          | 144
+subversivos_    | 117
+Yo_Soy_Asin     | 97
+ctxt_es         | 96
+protestona1     | 93
+Xuxipc          | 91
+rcabrero75      | 71
+SiPeroNo1       | 66
+vmm7773         | 58
+Cazatalentos    | 54
+ForretsGump     | 51
+gabrielrufian   | 48
+Klaseobreratk   | 45
+elmundotoday    | 44
+Famelica_legion | 42
+VictorGonz54    | 35
+Well086         | 32
+gerar666        | 32
+
+</div>
+
+id              | betweenesscentrality
+----------------|---------------------
+Yo_Soy_Asin     | 2341,4416666667
+Klaseobreratk   | 1495,1083333333
+carolacaracola5 | 1384,675
+gerar666        | 1257,8166666667
+PodemosAhora    | 995,2416666667
+VictorGonz54    | 905,5416666667
+vidushi_i       | 503,4166666667
+LaloliFaz       | 453,7583333333
+cantabriamiguel | 265,325
+protestona1     | 234
+iunida          | 225,5
+Lolo_Sev        | 224,5833333333
+sumalen59       | 202,3666666667
+roy_swan        | 112,5333333333
+begonys         | 105,6916666667
+\_ju1_          | 101,5
+PodemosSPB      | 52
+manueljarias    | 51
+IsaAranjuez     | 43
+ForretsGump     | 42,3333333333
+
+id              | closnesscentrality
+----------------|-------------------
+protestona1     | 1
+iunida          | 1
+\_ju1_          | 1
+IsaAranjuez     | 1
+ForretsGump     | 1
+Well086         | 1
+Famelica_legion | 1
+egel71          | 1
+TRoderic        | 1
+tecn_preocupado | 1
+Lacarrrpa       | 1
+JuanRaeiros     | 1
+joseph22795     | 1
+Vozdunciudadano | 1
+pasanospoco     | 1
+DEEMIAN666      | 1
+noabraspaz      | 1
+Sirereta        | 1
+majara0         | 1
+roberttomelitto | 1
+
 
 ## 6. Descubrimiento de comunidades en la red
 
