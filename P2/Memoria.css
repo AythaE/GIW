@@ -31,4 +31,31 @@
     tr:nth-child(even) {
         background-color: #f2f2f2
     }
+    div.tgrado {
+        display: block;
+        float: left;
+    }
+    div.tgradopesos {
+        display: block;
+        float: left;
+        margin-left: 35px;
+    }
+    div.tcercania {
+        display: block;
+        float: left;
+        margin-left: 33px;
+    }
+    div.tintermed {
+        display: block;
+        float: left;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    div.tcentralidad {
+        display: block;
+        float: left;
+        margin-top: 10px;
+        margin-left: 67px;
+        margin-bottom: 10px;
+    }
 }

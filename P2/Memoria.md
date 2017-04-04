@@ -47,7 +47,12 @@ Ejemplo de Indice final eliminando el enlace y añadiendo el número de página
     + [2.1.1. Estrategias de poda Pathfinder](#211-estrategias-de-poda-pathfinder)
     + [2.1.2. Estrategias de filtrado](#212-estrategias-de-filtrado)
 - [3. Cálculo de los valores de las medidas de análisis](#3-calculo-de-los-valores-de-las-medidas-de-analisis)
+  * [3.1. Medidas globales de la red](#31-medidas-globales-de-la-red)
+  * [3.2. Conectividad de la red](#32-conectividad-de-la-red)
 - [4. Determinación de las propiedades de la red](#4-determinacion-de-las-propiedades-de-la-red)
+  * [4.1. Distribución de grados](#41-distribucion-de-grados)
+  * [4.2. Distribución de distancias](#42-distribucion-de-distancias)
+  * [4.3. Distribución de coeficiente de clustering medio](#43-distribucion-de-coeficiente-de-clustering-medio)
 - [5. Calculo de los valores de las medidas de análisis de redes sociales](#5-calculo-de-los-valores-de-las-medidas-de-analisis-de-redes-sociales)
 - [6. Descubrimiento de comunidades en la red](#6-descubrimiento-de-comunidades-en-la-red)
 - [7. Visualización de la red social](#7-visualizacion-de-la-red-social)
@@ -147,7 +152,13 @@ Número de nodos de la componente<br/>gigante (% Respecto a la red total)   | 1.
 Número de enlaces de la componente<br/>gigante (% Respecto a la red total) | 2.770 (2,58%)
 
 
+<!-- Salto de página -->
+<div style="page-break-before: always;"></div>
+
 ## 4. Determinación de las propiedades de la red
+
+### 4.1. Distribución de grados
+En las siguientes gráficas se recogen las distribuciones de grados totales, de entrada y de salida de la red. Como se puede observar tienen una clara forma de distribución de larga estela, lo que quiere decir que esta distribución sigue la ley de la potencia y por tanto parece ser una red social libre de escala. También he realizado las gráficas de las distribución de grados con pesos, pero no he considerado significativo añadirlas al presentar la misma distribución pero con valores mayores.
 
 <img src="imgs/Degree/degree-distribution.png" alt="Gráfica de la distribución de grados" style="width: 380px; height: auto; display: block; margin: auto;"/>
 
@@ -155,38 +166,40 @@ Número de enlaces de la componente<br/>gigante (% Respecto a la red total) | 2.
 
 <img src="imgs/Degree/outdegree-distribution.png" alt="Gráfica de la distribución de grados de salida" style="width: 240px; height: auto; display: block; float: right;"/>
 
+### 4.2. Distribución de distancias
+
+### 4.3. Distribución de coeficiente de clustering medio
+
+
 
 ## 5. Calculo de los valores de las medidas de análisis de redes sociales
 
-<div style="display: block; float: left;">
+Teniendo en cuenta de la pregunta de investigación planteada es quienes son los usuarios mas influyentes en la discusión de Carrero Blanco es necesario realizar un análisis de redes sociales. En esencia hay que calcular medidas de centralidad para los nodos con objetivo de determinar cuales son los más importantes según estas. En las siguientes tablas se pueden observar los quince nodos más importantes según las medidas de **grado**, **grado teniendo en cuenta los pesos**, **cercanía**, **intermediación** y **centralidad de vector propio**.
 
-id              | eigencentrality
-----------------|----------------
-kira_95         | 1
-gerardotc       | 0,7410629959
-iunida          | 0,7241817322
-\_ju1_          | 0,3906274078
-Yo_Soy_Asin     | 0,3362844387
-subversivos_    | 0,2979991883
-ctxt_es         | 0,243182962
-protestona1     | 0,2374092107
-Klaseobreratk   | 0,2309777553
-Xuxipc          | 0,2198197312
-VictorGonz54    | 0,2174925892
-rcabrero75      | 0,1702846049
-SiPeroNo1       | 0,1644482346
-Famelica_legion | 0,1594494011
-ForretsGump     | 0,1588022263
-vmm7773         | 0,1443371012
-gerar666        | 0,1415573134
-ytuquesabes_    | 0,1372195991
-Cazatalentos    | 0,133333541
-carolacaracola5 | 0,1296667073
+<div class="tgrado">
+
+Nodo            | Grado
+----------------|------
+kira_95         | 293
+iunida          | 277
+gerardotc       | 206
+\_ju1_          | 144
+subversivos_    | 117
+Yo_Soy_Asin     | 97
+ctxt_es         | 96
+protestona1     | 93
+Xuxipc          | 91
+rcabrero75      | 71
+SiPeroNo1       | 66
+vmm7773         | 58
+Cazatalentos    | 54
+ForretsGump     | 51
+gabrielrufian   | 48
 
 </div>
-<div style="display: block; float: center;">
+<div class="tgradopesos">
 
-id              | weighted degree
+Nodo            | Grado con pesos
 ----------------|----------------
 iunida          | 810
 kira_95         | 789
@@ -203,66 +216,12 @@ Cazatalentos    | 140
 vmm7773         | 137
 ForretsGump     | 119
 Klaseobreratk   | 102
-gabrielrufian   | 101
-Famelica_legion | 99
-elmundotoday    | 93
-gerar666        | 78
-VictorGonz54    | 77
 
 </div>
-<div style="display: block; float: right;">
+<div class="tcercania">
 
-id              | degree
-----------------|-------
-kira_95         | 293
-iunida          | 277
-gerardotc       | 206
-\_ju1_          | 144
-subversivos_    | 117
-Yo_Soy_Asin     | 97
-ctxt_es         | 96
-protestona1     | 93
-Xuxipc          | 91
-rcabrero75      | 71
-SiPeroNo1       | 66
-vmm7773         | 58
-Cazatalentos    | 54
-ForretsGump     | 51
-gabrielrufian   | 48
-Klaseobreratk   | 45
-elmundotoday    | 44
-Famelica_legion | 42
-VictorGonz54    | 35
-Well086         | 32
-gerar666        | 32
-
-</div>
-
-id              | betweenesscentrality
-----------------|---------------------
-Yo_Soy_Asin     | 2341,4416666667
-Klaseobreratk   | 1495,1083333333
-carolacaracola5 | 1384,675
-gerar666        | 1257,8166666667
-PodemosAhora    | 995,2416666667
-VictorGonz54    | 905,5416666667
-vidushi_i       | 503,4166666667
-LaloliFaz       | 453,7583333333
-cantabriamiguel | 265,325
-protestona1     | 234
-iunida          | 225,5
-Lolo_Sev        | 224,5833333333
-sumalen59       | 202,3666666667
-roy_swan        | 112,5333333333
-begonys         | 105,6916666667
-\_ju1_          | 101,5
-PodemosSPB      | 52
-manueljarias    | 51
-IsaAranjuez     | 43
-ForretsGump     | 42,3333333333
-
-id              | closnesscentrality
-----------------|-------------------
+Nodo            | Cercanía
+----------------|---------
 protestona1     | 1
 iunida          | 1
 \_ju1_          | 1
@@ -278,19 +237,81 @@ JuanRaeiros     | 1
 joseph22795     | 1
 Vozdunciudadano | 1
 pasanospoco     | 1
-DEEMIAN666      | 1
-noabraspaz      | 1
-Sirereta        | 1
-majara0         | 1
-roberttomelitto | 1
 
+</div>
+<div class="tintermed">
+
+
+Nodo            | Intermediación
+----------------|----------------
+Yo_Soy_Asin     | 2341,4416666667
+Klaseobreratk   | 1495,1083333333
+carolacaracola5 | 1384,675
+gerar666        | 1257,8166666667
+PodemosAhora    | 995,2416666667
+VictorGonz54    | 905,5416666667
+vidushi_i       | 503,4166666667
+LaloliFaz       | 453,7583333333
+cantabriamiguel | 265,325
+protestona1     | 234
+iunida          | 225,5
+Lolo_Sev        | 224,5833333333
+sumalen59       | 202,3666666667
+roy_swan        | 112,5333333333
+begonys         | 105,6916666667
+
+</div>
+<div class="tcentralidad">
+
+Nodo            | Centralidad de vector propio
+----------------|-----------------------------
+kira_95         | 1
+gerardotc       | 0,7410629959
+iunida          | 0,7241817322
+\_ju1_          | 0,3906274078
+Yo_Soy_Asin     | 0,3362844387
+subversivos_    | 0,2979991883
+ctxt_es         | 0,243182962
+protestona1     | 0,2374092107
+Klaseobreratk   | 0,2309777553
+Xuxipc          | 0,2198197312
+VictorGonz54    | 0,2174925892
+rcabrero75      | 0,1702846049
+SiPeroNo1       | 0,1644482346
+Famelica_legion | 0,1594494011
+ForretsGump     | 0,1588022263
+
+
+</div>
+
+Se pueden extraer diversas conclusiones de estos datos:
+- La medida de cercanía no discrimina nada ya que existe un elevado número de nodos con cercanía igual a uno (máxima ya que se encuentra normalizada). Esto probablemente se deba a que son nodos que se encuentran en el "medio", conectados a multiples hubs, por lo que sus distancias al resto de nodos son bastante reducidas.
+- La intermediación está pensada como una medida para capturar la "correduría", esto intuitivamente quiere decir que se considera mejor a un nodo cuando más grupos de nodos separados conecte. Esta medida puede ser interesante para algunas preguntas, pero en este caso concreto que busco determinar los actores más importante esta claro que esta muy relacionado con los usuarios más mencionados o retuiteados.
+- En relación con esto último el grado parece una buena medida y como se puede ver el grado con o sin peso da unas medidas similares, se produce algún cambio de posición pero de entre los 15 primeros solo uno (el último de ambas tablas) es diferente.
+- La centralidad de vector propio es una generalización de la medida de grado incorporando a la idea de que no solo influye que un nodo tenga un gran número de conexiones para ser importante, si no la "calidad" de esas conexiones, es decir la importancia de sus vecinos.
+
+Por todo ello selecciono la **centralidad de vector propio** como la medida de centralidad más relevante para mi investigación.
 
 ## 6. Descubrimiento de comunidades en la red
+Como método de descubrimiento de comunidades he aplicado el método de Lovaina disponible en Gephi. Para aplicarlo hay que determinar la resolución lo que marca el tamaño de los grupos (cuanta más resolución, grupos mas grandes). En la siguiente tabla recojo los valores de modularidad y número de comunidades detectadas respecto a la resolución empleada, hay que tener en cuenta que el proceso es algo aleatorio y que a igual resolución se pueden producir diferentes valores, aun así da una idea del rango de valores entre los que estará.
 
+Resulución | Modularidad | Nº Comunidades
+-----------|-------------|---------------
+0,85       | 0,428       | 16
+1          | 0,431       | 11
+1,2        | 0,422       | 9
+1,35       | 0,418       | 8
+1,5        | 0,401       | 6
+
+ 
 ## 7. Visualización de la red social
 
 ## 8. Discusión de los resultados obtenidos
+nodo mas central Casandra
 
+Tendencias ideologicas de izquierdas: IU, Gabriel Rufian
+
+Medios de comunicación no mayoritatios: ctxt eldiario (publico)
 
 ## Anexo: twitter_search
 **Twitter_search** es un programa en Python para recuperar tuits que contengan ciertas palabras o hashtags y exportarlos en ficheros `.csv`, permite seleccionar las fechas entre las que buscar los tuits, el número de tuits a recuperar y el idioma de los tuits. Usa el módulo Tweepy [[2]](#2) para manejar las llamadas a la API de Twitter.
