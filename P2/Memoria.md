@@ -78,7 +78,20 @@ La pregunta concreta de investigación es **¿Cúales los usuarios más relevant
 
 Es necesario acotar un poco más la pregunta de investigación, ya que no he determinado una ventana temporal para estudiar el tema, por ello empecé descargando todos los tuits que se habían escrito en distintos días para ver como evoluciona su repercusión a lo largo del tiempo y elegir el día más interesante para estudiarlo. Con estos datos he creado la siguiente gráfica que representa el número de tuits respecto a los días:
 
-<img src="imgs/Evolucion_num_Tweets.png" alt="Gráfico de evolución del número de Tweets respecto a la fecha" style="width: 380px; height: auto; display: block; margin: auto;"/>
+<div class="tintermed">
+
+Fecha      | Número de<br/>Tweets
+-----------|-----------------
+26-03-2017 | 1.735
+27-03-2017 | 797
+28-03-2017 | 643
+29-03-2017 | 115.254
+30-03-2017 | 61.724
+31-03-2017 | 20.846
+01-04-2017 | 9.125
+
+</div>
+<img src="imgs/Evolucion_num_Tweets.png" alt="Gráfico de evolución del número de Tweets respecto a la fecha" style="width: 350px; height: auto; display: block; float:left;"/>
 
 Como se puede apreciar se produce un importante incremento del número de Tweets que contienen "Carrero Blanco" el día **29 de Marzo** (llegando a 115.254 tuits), coincidiendo con la sentencia que condenaba a Casandra Vera por sus chistes. Por ello este será el día seleccionado para realizar el estudio.
 
@@ -151,14 +164,14 @@ Número de componentes conexas                                              | 1
 Número de nodos de la componente<br/>gigante (% Respecto a la red total)   | 1.002 (1,99%)
 Número de enlaces de la componente<br/>gigante (% Respecto a la red total) | 2.770 (2,58%)
 
-
-<!-- Salto de página -->
-<div style="page-break-before: always;"></div>
+Estos valores obtenidos tienen todo el sentido del mundo, ya que para hacer la red manejable se ha filtrado por _componente gigante_ lo que implica que solo se mantienen los nodos de la componente conexa mayoritaria.
 
 ## 4. Determinación de las propiedades de la red
 
 ### 4.1. Distribución de grados
-En las siguientes gráficas se recogen las distribuciones de grados totales, de entrada y de salida de la red. Como se puede observar tienen una clara forma de distribución de larga estela, lo que quiere decir que esta distribución sigue la ley de la potencia y por tanto parece ser una red social libre de escala. También he realizado las gráficas de las distribución de grados con pesos, pero no he considerado significativo añadirlas al presentar la misma distribución pero con valores mayores.
+En las siguientes gráficas se recogen las distribuciones de grados totales, de entrada y de salida de la red. Como se puede observar todas tienen tienen una clara forma de distribución de larga estela, lo que quiere decir que esta distribución sigue la ley de la potencia y por tanto parece ser una red social libre de escala.
+
+También he realizado las gráficas de las distribución de grados con pesos, pero no he considerado significativo añadirlas al presentar la misma distribución pero con valores mayores.
 
 <img src="imgs/Degree/degree-distribution.png" alt="Gráfica de la distribución de grados" style="width: 380px; height: auto; display: block; margin: auto;"/>
 
@@ -168,15 +181,27 @@ En las siguientes gráficas se recogen las distribuciones de grados totales, de 
 
 ### 4.2. Distribución de distancias
 
-### 4.3. Distribución de coeficiente de clustering medio
+En la siguiente gráfica se observa la distribución de la excentricidad que hace mide la distancia máxima de cada nodo al nodo más lejano de la red, lo primero que llama la atención es que existen nodos con valor 0, estos nodos son aquellos con grado de salida 0 por tanto no es posible llegar desde ellos al resto de nodos al tratarse de un grafo dirigido.
 
+Cabe recordar que la distancia media obtenida para esta red es &lt;_d_&gt; = 2,447, mucho menor que la distancia media para una red aleatoria equivalente &lt;_d<sub>aleatoria</sub>_&gt; = 6,7964, lo que indica que nos encontramos ante una red de mundo pequeño, pero incluso si comparamos la distancia media con la distancia media de una red libre de escala (mundo ultra-pequeño, _logn(N)/logn(logn(N))_) &lt;_d<sub>libre-escala</sub>_&gt; = 3,5747 vemos que sigue siendo menor por lo que podemos deducir claramente que se cumple la propiedad de mundos pequeños.
+
+Se observa además, que a pesar de que la distancia máxima es 8, la frecuencia de distancias decae mucho por encima de la media (aproximadamente el 77% de los nodos tiene una distancia máxima inferior a la media), lo que es consecuencia de la propiedad de mundos pequeños.
+
+<img src="imgs/Distances/Eccentricity Distribution.png" alt="Gráfica de la distribución distancias" style="width: 380px; height: auto; display: block; margin: auto;"/>
+
+### 4.3. Distribución de coeficiente de clustering medio
+En la siguiente gráfica se observa la distribución de los coeficientes de clustering. Para comparar esta red con una red aleatoria hay que recordar el coeficiente de clustering medio para una red aleatoria equivalente (&lt;_C<sub>aleatoria</sub>_&gt;) que era 0,00276, mucho menor que el coeficiente de clustering medio de esta red 0,082.
+
+Se observa también que el coeficiente de clustering es mucho mayor en los nodos poco conectados que en los hubs, lo que indican que tienden a estar en zonas densamente pobladas, esto es una consecuencia de la jerarquía de redes.
+
+<img src="imgs/Clustering/Clustering distribution.png" alt="Gráfica de la distribución de coeficiente de clustering" style="width: 420px; height: auto; display: block; margin: auto;"/>
 
 
 ## 5. Calculo de los valores de las medidas de análisis de redes sociales
 
 Teniendo en cuenta de la pregunta de investigación planteada es quienes son los usuarios mas influyentes en la discusión de Carrero Blanco es necesario realizar un análisis de redes sociales. En esencia hay que calcular medidas de centralidad para los nodos con objetivo de determinar cuales son los más importantes según estas. En las siguientes tablas se pueden observar los quince nodos más importantes según las medidas de **grado**, **grado teniendo en cuenta los pesos**, **cercanía**, **intermediación** y **centralidad de vector propio**.
 
-<div class="tgrado">
+<div class="tizq">
 
 Nodo            | Grado
 ----------------|------
@@ -190,11 +215,6 @@ ctxt_es         | 96
 protestona1     | 93
 Xuxipc          | 91
 rcabrero75      | 71
-SiPeroNo1       | 66
-vmm7773         | 58
-Cazatalentos    | 54
-ForretsGump     | 51
-gabrielrufian   | 48
 
 </div>
 <div class="tgradopesos">
@@ -211,11 +231,6 @@ ctxt_es         | 247
 Yo_Soy_Asin     | 233
 Xuxipc          | 220
 rcabrero75      | 188
-SiPeroNo1       | 173
-Cazatalentos    | 140
-vmm7773         | 137
-ForretsGump     | 119
-Klaseobreratk   | 102
 
 </div>
 <div class="tcercania">
@@ -232,11 +247,6 @@ Famelica_legion | 1
 egel71          | 1
 TRoderic        | 1
 tecn_preocupado | 1
-Lacarrrpa       | 1
-JuanRaeiros     | 1
-joseph22795     | 1
-Vozdunciudadano | 1
-pasanospoco     | 1
 
 </div>
 <div class="tintermed">
@@ -254,11 +264,6 @@ vidushi_i       | 503,4166666667
 LaloliFaz       | 453,7583333333
 cantabriamiguel | 265,325
 protestona1     | 234
-iunida          | 225,5
-Lolo_Sev        | 224,5833333333
-sumalen59       | 202,3666666667
-roy_swan        | 112,5333333333
-begonys         | 105,6916666667
 
 </div>
 <div class="tcentralidad">
@@ -275,11 +280,6 @@ ctxt_es         | 0,243182962
 protestona1     | 0,2374092107
 Klaseobreratk   | 0,2309777553
 Xuxipc          | 0,2198197312
-VictorGonz54    | 0,2174925892
-rcabrero75      | 0,1702846049
-SiPeroNo1       | 0,1644482346
-Famelica_legion | 0,1594494011
-ForretsGump     | 0,1588022263
 
 
 </div>
@@ -287,7 +287,7 @@ ForretsGump     | 0,1588022263
 Se pueden extraer diversas conclusiones de estos datos:
 - La medida de cercanía no discrimina nada ya que existe un elevado número de nodos con cercanía igual a uno (máxima ya que se encuentra normalizada). Esto probablemente se deba a que son nodos que se encuentran en el "medio", conectados a multiples hubs, por lo que sus distancias al resto de nodos son bastante reducidas.
 - La intermediación está pensada como una medida para capturar la "correduría", esto intuitivamente quiere decir que se considera mejor a un nodo cuando más grupos de nodos separados conecte. Esta medida puede ser interesante para algunas preguntas, pero en este caso concreto que busco determinar los actores más importante esta claro que esta muy relacionado con los usuarios más mencionados o retuiteados.
-- En relación con esto último el grado parece una buena medida y como se puede ver el grado con o sin peso da unas medidas similares, se produce algún cambio de posición pero de entre los 15 primeros solo uno (el último de ambas tablas) es diferente.
+- En relación con esto último el grado parece una buena medida y como se puede ver el grado con o sin peso da unas medidas similares, se produce algún cambio de posición pero de entre los diez primeros ningún nodo es diferente.
 - La centralidad de vector propio es una generalización de la medida de grado incorporando a la idea de que no solo influye que un nodo tenga un gran número de conexiones para ser importante, si no la "calidad" de esas conexiones, es decir la importancia de sus vecinos.
 
 Por todo ello selecciono la **centralidad de vector propio** como la medida de centralidad más relevante para mi investigación.
@@ -300,11 +300,25 @@ Resulución | Modularidad | Nº Comunidades
 0,85       | 0,428       | 16
 1          | 0,431       | 11
 1,2        | 0,422       | 9
-1,35       | 0,418       | 8
+1,3        | 0,415       | 7
 1,5        | 0,401       | 6
 
- 
+Hay que mencionar que la modularidad de una partición de comunidades es un valor definido entre [-1, 1] que mide la calidad de esta partición, siendo favorable cuanto mayor sea su valor. Valores superiores a 0,3 denotan que puede haber una estructura de comunidades subyacente a la red.
+
+Para realizar un análisis de comunidades es necesario que no sean demasiadas ya que eso incrementa su complejidad, por ello sacrificando algo de modularidad he decidido aplicar una resolución de 1,3 obteniendo una modularidad de 0,415 y siete comunidades.
+
+En la siguiente gráfica se observa la distribución de tamaño de estas comunidades.
+
+Tabla con distribución y porcentajes
+<img src="imgs/Modularity/image1.png" alt="Gráfica de la distribución distancias" style="width: 380px; height: auto; display: block; margin: auto;"/>
+
+Analizar coherencia con los usuarios
+
 ## 7. Visualización de la red social
+
+Centralidad de vector propio tamaño, color comunidades, filtrar por 500 followers y rellenar los que no tienen followers
+
+Alguna visualización más (centralidad e intermediación)
 
 ## 8. Discusión de los resultados obtenidos
 nodo mas central Casandra
