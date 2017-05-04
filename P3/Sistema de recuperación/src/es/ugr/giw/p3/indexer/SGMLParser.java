@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,30 +23,43 @@ import org.xml.sax.SAXException;
 
 import es.ugr.giw.p3.common.News;
 
-public class SGMLParser {
+/**
+ * Class SGMLParser to parse files from the EFE SGML news
+ */
+class SGMLParser {
     private static DocumentBuilder docBuilder = null;
-    private static final Logger logger = Indexer.setupLogger(Logger.getLogger(SGMLParser.class.getName()));
+    private static Logger LOGGER = null;
 
-gi
-    public static ArrayList<News> parseNews(File dir) throws ParserConfigurationException, SAXException, IOException {
-        ArrayList<News> newsArray = new ArrayList<>();
+    /**
+     * Method to parse all the news in the selected directory
+     * @param dir File instance with the directory to look for the news
+     * @return List of parsed news
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
+    static List<News> parseNews(File dir) throws ParserConfigurationException, SAXException, IOException {
+        if (LOGGER == null) {
+            setupLogger();
+        }
+        List<News> newsArray = new ArrayList<>();
         if (dir != null && dir.exists() && dir.isDirectory()) {
             File[] files = dir.listFiles();
 
-            logger.log(Level.INFO, "Leyendo noticias...");
+            LOGGER.log(Level.INFO, "Leyendo noticias...");
 
             for (File file : files) {
                 if (file.getName().matches("^.+\\.sgml$")) {
-                    ArrayList<News> partialNewsArray = parseSingleFile(file);
+                    List<News> partialNewsArray = parseSingleFile(file);
 
                     newsArray.addAll(partialNewsArray);
                 }
 
             }
-            logger.log(Level.INFO, "Noticias leídas: {0}", newsArray.size());
+            LOGGER.log(Level.INFO, "Noticias leídas: {0}", newsArray.size());
 
         } else {
-            System.err.println("Error: la ruta " + dir + " no existe o no es un directorio");
+            System.err.println("\nError: la ruta " + dir + " no existe o no es un directorio");
             return null;
         }
         return newsArray;
@@ -52,17 +67,16 @@ gi
     }
 
     /**
-     * @param f
-     * @return
+     * Method to parse the news on a single SGML file
+     * @param f File instance to the desired SGML file
+     * @return List of parsed news
      * @throws ParserConfigurationException
      * @throws IOException
      * @throws SAXException
      * @see {@link http://www.mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/}
-     * @see {@link https://github.com/fblupi/master_informatica-GIW/blob/master/P3/InformationRetrievalSystem/src/fblupi/irs/Indexer.java}
      */
-    private static ArrayList<News> parseSingleFile(File f)
+    private static List<News> parseSingleFile(File f)
             throws ParserConfigurationException, SAXException, IOException {
-
 
         String fContent = new String(Files.readAllBytes(Paths.get(f.toURI())), "ISO-8859-1");
 
@@ -73,7 +87,7 @@ gi
         fContent = fContent.replace(";<", ";");
         fContent = "<SGML>" + fContent + "</SGML>";
 
-        logger.log(Level.FINE, "Opening file: {0}", f.getPath());
+        LOGGER.log(Level.FINE, "Opening file: {0}", f.getPath());
 
         if (docBuilder == null) {
             docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -83,7 +97,7 @@ gi
         doc.getDocumentElement().normalize();
 
 
-        ArrayList<News> newsArray = new ArrayList<>();
+        List<News> newsArray = new ArrayList<>();
 
         NodeList nList = doc.getElementsByTagName("DOC");
 
@@ -104,5 +118,20 @@ gi
 
         }
         return newsArray;
+    }
+
+    /**
+     * Method to setup the logger to the desired Level
+     * @see {@link http://www.vogella.com/tutorials/Logging/article.html}
+     * @see {@link http://stackoverflow.com/questions/6315699/why-are-the-level-fine-logging-messages-not-showing}
+     */
+    private static void setupLogger() {
+        LOGGER = Logger.getLogger(SGMLParser.class.getName());
+        LOGGER.setLevel(Indexer.logLvl);
+        LOGGER.setUseParentHandlers(false);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setLevel(Indexer.logLvl);
+        LOGGER.addHandler(handler);
+
     }
 }
