@@ -85,11 +85,6 @@ public class Indexer {
         LOGGER.log(Level.INFO, "Creando el IndexWriter...");
         // Store it in drive
 
-        File outputDir = new File(pathOutputIndex);
-        if (outputDir == null || !outputDir.isDirectory()){
-            System.err.println("\nError: el directorio de salida "+pathOutputIndex+" no es un directorio.");
-            return;
-        }
         Directory directory = FSDirectory.open(new File(pathOutputIndex));
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_43, analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
