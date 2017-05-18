@@ -6,8 +6,6 @@ package es.ugr.giw.p4;
 public class Movie {
     private int idMovie;
     private String title;
-    //TODO Check if it's interesting to use the movie genre
-
 
     public Movie(int idMovie, String title) {
         this.idMovie = idMovie;
